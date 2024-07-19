@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import BetModal from "./BetModal";
 import PortfolioScreen from "./PortfolioScreen";
-import SidebarMenu from "./SidebarMenu";
+import SidebarMenu from "./SideBarMenu";
 
-const App = () => {
+const Dashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [betChoice, setBetChoice] = useState(null);
   const [showPortfolio, setShowPortfolio] = useState(false);
@@ -27,6 +27,24 @@ const App = () => {
   const toggleSidebar = () => setSidebarVisible(!sidebarVisible);
 
   const toggleMoreCategories = () => setShowMoreCategories(!showMoreCategories);
+
+  const cardData = [
+    {
+      title: "Budget FY 24-25 LIVE!",
+      linkText: "KNOW MORE ▶",
+      style: styles.budgetBanner,
+    },
+    {
+      title: "EXPIRING SOON",
+      subtitle: "TRADE ON ECONOMY & NEWS ▶",
+      style: styles.expiringBanner,
+    },
+    {
+      title: "New Card Title",
+      subtitle: "New Card Subtitle ▶",
+      style: styles.newCardBanner,
+    },
+  ];
 
   const renderCategories = () => {
     const categories = ["Cricket", "Crypto", "Economy"];
@@ -68,16 +86,19 @@ const App = () => {
     <ScrollView>
       {renderCategories()}
 
-      <View style={styles.bannerContainer}>
-        <View style={styles.budgetBanner}>
-          <Text style={styles.bannerTitle}>Budget FY 24-25 LIVE!</Text>
-          <Text style={styles.bannerLink}>KNOW MORE ▶</Text>
-        </View>
-        <View style={styles.expiringBanner}>
-          <Text style={styles.expiringTitle}>EXPIRING SOON</Text>
-          <Text style={styles.expiringSubtitle}>TRADE ON ECONOMY & NEWS ▶</Text>
-        </View>
-      </View>
+      <ScrollView
+        horizontal
+        style={styles.bannerContainer}
+        showsHorizontalScrollIndicator={false}
+      >
+        {cardData.map((card, index) => (
+          <View key={index} style={[styles.banner, card.style]}>
+            <Text style={styles.bannerTitle}>{card.title}</Text>
+            {card.subtitle && <Text style={styles.bannerSubtitle}>{card.subtitle}</Text>}
+            <Text style={styles.bannerLink}>{card.linkText}</Text>
+          </View>
+        ))}
+      </ScrollView>
 
       <Text style={styles.sectionTitle}>Trending now</Text>
 
@@ -93,7 +114,9 @@ const App = () => {
           "NYSF",
           "Expiring Soon",
           "Budget FY",
+          "IND-WvPAK-M"
         ].map((item, index) => (
+          <View style={{flexDirection:"column",gap:20}}>
           <View key={index} style={styles.trendingItem}>
             <View style={styles.trendingIcon} />
             <Text>{item}</Text>
@@ -102,6 +125,16 @@ const App = () => {
                 <Text style={styles.liveText}>LIVE</Text>
               </View>
             )}
+          </View>
+          <View key={index} style={styles.trendingItem}>
+            <View style={styles.trendingIcon} />
+            <Text>{item}</Text>
+            {["IND-WvPAK-W", "NYSF"].includes(item) && (
+              <View style={styles.liveTag}>
+                <Text style={styles.liveText}>LIVE</Text>
+              </View>
+            )}
+          </View>
           </View>
         ))}
       </ScrollView>
@@ -130,6 +163,79 @@ const App = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <View style={styles.predictionCard}>
+        <Text style={styles.tradersCount}>👥 1447 traders</Text>
+        <Text style={styles.predictionQuestion}>
+          India Women to win the match vs Pakistan Women?
+        </Text>
+        <Text style={styles.predictionStats}>
+          H2H last 5 T20 : IND-W 4 , PAK-W 1, DRAW 0
+        </Text>
+        <Text style={styles.readMore}>Read more</Text>
+        <View style={styles.predictionButtons}>
+          <TouchableOpacity
+            style={[styles.predictionButton, styles.yesButton]}
+            onPress={() => openModal("Yes")}
+          >
+            <Text style={styles.yesButtonText}>Yes ₹8.4</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.predictionButton, styles.noButton]}
+            onPress={() => openModal("No")}
+          >
+            <Text style={styles.noButtonText}>No ₹1.6</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.predictionCard}>
+        <Text style={styles.tradersCount}>👥 1447 traders</Text>
+        <Text style={styles.predictionQuestion}>
+          India Women to win the match vs Pakistan Women?
+        </Text>
+        <Text style={styles.predictionStats}>
+          H2H last 5 T20 : IND-W 4 , PAK-W 1, DRAW 0
+        </Text>
+        <Text style={styles.readMore}>Read more</Text>
+        <View style={styles.predictionButtons}>
+          <TouchableOpacity
+            style={[styles.predictionButton, styles.yesButton]}
+            onPress={() => openModal("Yes")}
+          >
+            <Text style={styles.yesButtonText}>Yes ₹8.4</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.predictionButton, styles.noButton]}
+            onPress={() => openModal("No")}
+          >
+            <Text style={styles.noButtonText}>No ₹1.6</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.predictionCard}>
+        <Text style={styles.tradersCount}>👥 1447 traders</Text>
+        <Text style={styles.predictionQuestion}>
+          India Women to win the match vs Pakistan Women?
+        </Text>
+        <Text style={styles.predictionStats}>
+          H2H last 5 T20 : IND-W 4 , PAK-W 1, DRAW 0
+        </Text>
+        <Text style={styles.readMore}>Read more</Text>
+        <View style={styles.predictionButtons}>
+          <TouchableOpacity
+            style={[styles.predictionButton, styles.yesButton]}
+            onPress={() => openModal("Yes")}
+          >
+            <Text style={styles.yesButtonText}>Yes ₹8.4</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.predictionButton, styles.noButton]}
+            onPress={() => openModal("No")}
+          >
+            <Text style={styles.noButtonText}>No ₹1.6</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      
     </ScrollView>
   );
 
@@ -195,6 +301,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f0f0f0",
+    paddingTop:"10%"
   },
   header: {
     flexDirection: "row",
@@ -245,33 +352,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 16,
   },
-  budgetBanner: {
-    flex: 1,
-    backgroundColor: "#ffeeba",
+  banner: {
+    width: 200,
+    marginRight: 8,
     borderRadius: 8,
     padding: 16,
-    marginRight: 8,
+  
+  },
+  budgetBanner: {
+    backgroundColor: "#ffeeba",
   },
   expiringBanner: {
-    flex: 1,
     backgroundColor: "#ffc107",
-    borderRadius: 8,
-    padding: 16,
-    marginLeft: 8,
+  },
+  newCardBanner: {
+    backgroundColor: "#c3c3c3",
   },
   bannerTitle: {
     fontWeight: "bold",
   },
-  bannerLink: {
-    color: "blue",
+  bannerSubtitle: {
+    color: "white",
     marginTop: 8,
   },
-  expiringTitle: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  expiringSubtitle: {
-    color: "white",
+  bannerLink: {
+    color: "blue",
     marginTop: 8,
   },
   sectionTitle: {
@@ -376,4 +481,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Dashboard;
